@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Project-main/Qwen3-Embedding-0.6B" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Project-main/cross-encoder-model" vcs="Git" />
   </component>
 </project>
