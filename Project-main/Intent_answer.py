@@ -1,3 +1,4 @@
+#=====================这是接受用户信息，获取回答的主函数===================
 import os
 from dotenv import load_dotenv
 from Intent_Recognition.code.intent_classifier import IntentClassifier
@@ -149,49 +150,11 @@ class InteractiveAgent:
             except Exception as e:
                 print(f"❌ 调用 {intent} RAG智能体失败：{e}\n")
 
-    def batch_test(self):
-        """批量测试不同意图"""
-        test_queries = [
-            "我感到很焦虑，怎么办？",
-            "如何制定健身计划？",
-            "图书馆在哪里？",
-            "如何写好论文摘要？"
-        ]
-
-        print("=== 批量测试模式 ===\n")
-
-        for query in test_queries:
-            print(f"🧑 测试问题：{query}")
-
-            # 意图识别
-            result = self.classifier.predict_intent(query)
-            intent = result["best_intent"]
-            confidence = result["confidence"]
-            print(f"🤖 识别意图：{intent} (置信度 {confidence:.2f})")
-
-            # RAG调用
-            rag_agent = self.get_rag_agent(intent)
-            if rag_agent:
-                try:
-                    answer = rag_agent.call_RAG(query)
-                    print(f"🤖 {intent} 回答：{answer[:100]}...")
-                except Exception as e:
-                    print(f"❌ 调用失败：{e}")
-
-            print("-" * 50)
-
 
 if __name__ == "__main__":
     try:
         agent = InteractiveAgent()
-
-        # 检查命令行参数
-        import sys
-
-        if len(sys.argv) > 1 and sys.argv[1] == "test":
-            agent.batch_test()
-        else:
-            agent.chat()
+        agent.chat()  # ✅ 添加这一行！
 
     except KeyboardInterrupt:
         print("\n👋 程序被用户中断，再见！")
